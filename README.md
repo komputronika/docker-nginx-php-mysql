@@ -302,7 +302,7 @@ source .env && sudo docker exec -i $(sudo docker-compose ps -q mysqldb) mysql -u
 <?php
     mysqli_report(MYSQLI_REPORT_STRICT);
     try {
-        $mysqli = new mysqli('mysql','dev','dev','test');
+        $mysqli = new mysqli('mysql:8989','dev','dev','test');
         echo 'Connect success.';
     } catch (mysqli_sql_exception $e) {
         echo 'ERROR:'.$e->getMessage();
@@ -315,11 +315,13 @@ ___
 
 * Copy all your web files to `./web/public` folder
 * You can change the default ports by modifying file `docker-compose.yml`, for example: 
-```sh
-    ports:
-        - "80:80"   
-        - "443:443"
-```        
+    ```sh
+        ports:
+            - "80:80"   
+            - "443:443"
+    ```        
+* Connect to phpMyAdmin using address: `http://yourhost:8080`, Host: `mysql`.    
+* To change MySQL password, edit `.env` file.
 
 ___
 
