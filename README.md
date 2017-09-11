@@ -1,4 +1,4 @@
-# Nginx PHP MySQL [![Build Status](https://travis-ci.org/nanoninja/docker-nginx-php-mysql.svg?branch=master)](https://travis-ci.org/nanoninja/docker-nginx-php-mysql) [![GitHub version](https://badge.fury.io/gh/nanoninja%2Fdocker-nginx-php-mysql.svg)](https://badge.fury.io/gh/nanoninja%2Fdocker-nginx-php-mysql)
+# Nginx PHP MySQL 
 
 Docker running Nginx, PHP-FPM, Composer, MySQL and PHPMyAdmin.
 
@@ -16,19 +16,15 @@ Docker running Nginx, PHP-FPM, Composer, MySQL and PHPMyAdmin.
 
     We'll generate and configure SSL certificate for nginx before running server.
 
-4. [Configure Xdebug](#configure-xdebug)
-
-    We'll configure Xdebug for IDE (PHPStorm or Netbeans).
-
-5. [Run the application](#run-the-application)
+4. [Run the application](#run-the-application)
 
     By this point we’ll have all the project pieces in place.
 
-6. [Use Makefile](#use-makefile)
+5. [Use Makefile](#use-makefile)
 
     When developing, you can use `Makefile` for doing recurrent operations.
 
-7. [Use Docker Commands](#use-docker-commands)
+6. [Use Docker Commands](#use-docker-commands)
 
     When running, you can use docker commands for doing recurrent operations.
 
@@ -150,27 +146,6 @@ cd docker-nginx-php-mysql
     #     ...
     # }
     ```
-
----
-
-## Configure Xdebug
-
-If you use another IDE than PHPStorm or Netbeans, go to the [remote debugging](https://xdebug.org/docs/remote) section of Xdebug documentation.
-
-1. Get your own local IP address :
-
-    ```sh
-    sudo ifconfig
-    ```
-
-2. Edit php file `etc/php/php.ini` and comment or uncomment the configuration as needed.
-
-3. Set the `remote_host` parameter with your IP :
-
-    ```sh
-    xdebug.remote_host=192.168.0.1 # your IP
-    ```
-
 ---
 
 ## Run the application
@@ -324,6 +299,20 @@ source .env && sudo docker exec -i $(sudo docker-compose ps -q mysqldb) mysql -u
         $pdo = new PDO($dsn, 'dev', 'dev');
     } catch (PDOException $e) {
         echo $e->getMessage();
+    }
+?>
+```
+
+#### Connecting MySQL with MySQLi
+
+```php
+<?php
+    mysqli_report(MYSQLI_REPORT_STRICT);
+    try {
+        $mysqli = new mysqli('mysql','dev','dev','test');
+        echo 'Connect success.';
+    } catch (mysqli_sql_exception $e) {
+        echo 'ERROR:'.$e->getMessage();
     }
 ?>
 ```
