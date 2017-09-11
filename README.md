@@ -327,11 +327,3 @@ source .env && sudo docker exec -i $(sudo docker-compose ps -q mysqldb) mysql -u
     }
 ?>
 ```
-
----
-
-## Help us !
-
-Any thought, feedback or (hopefully not!)
-
-Developed by [@letvinz](https://twitter.com/letvinz)

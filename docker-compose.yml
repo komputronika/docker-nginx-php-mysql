@@ -14,7 +14,8 @@ services:
             - php
             - mysqldb
     php:
-        image: nanoninja/php-fpm
+        # php-fpm without xdebug
+        image: komputronika/php-fpm
         restart: always
         volumes:
             - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
