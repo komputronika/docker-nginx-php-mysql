@@ -1,6 +1,12 @@
-# Nginx PHP MySQL 
+# Nginx PHP MySQL Docker
 
 Docker running Nginx, PHP-FPM, Composer, MySQL and PHPMyAdmin.
+
+This project is a docker composition for creating a basic and common web server in a Linux operating system.
+
+Maybe you have created a server or rented a VPS with Linux inside, and now you want to install web server fast and easy, then you can use this docker project.
+
+The project uses Nginx, a lightweight web server.
 
 ## Overview
 
@@ -62,7 +68,7 @@ sudo apt install build-essential
 
 * [Nginx](https://hub.docker.com/_/nginx/)
 * [MySQL](https://hub.docker.com/_/mysql/)
-* [PHP-FPM](https://hub.docker.com/r/nanoninja/php-fpm/)
+* [PHP-FPM](https://hub.docker.com/r/komputronika/php-fpm/)
 * [Composer](https://hub.docker.com/_/composer/)
 * [PHPMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/)
 * [Generate Certificate](https://hub.docker.com/r/jacoelho/generate-certificate/)
@@ -85,7 +91,7 @@ This project use the following ports :
 To install [Git](http://git-scm.com/book/en/v2/Getting-Started-Installing-Git), download it and install following the instructions : 
 
 ```sh
-git clone https://github.com/nanoninja/docker-nginx-php-mysql.git
+git clone https://github.com/komputronika/docker-nginx-php-mysql.git
 ```
 
 Go to the project directory : 
@@ -290,19 +296,6 @@ source .env && sudo docker exec $(shell docker-compose ps -q mysqldb) mysqldump 
 source .env && sudo docker exec -i $(sudo docker-compose ps -q mysqldb) mysql -u"$MYSQL_ROOT_USER" -p"$MYSQL_ROOT_PASSWORD" < "data/db/dumps/db.sql"
 ```
 
-#### Connecting MySQL from [PDO](http://php.net/manual/en/book.pdo.php)
-
-```php
-<?php
-    try {
-        $dsn = 'mysql:host=mysql;dbname=test;charset=utf8;port=3306';
-        $pdo = new PDO($dsn, 'dev', 'dev');
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-?>
-```
-
 #### Connecting MySQL with MySQLi
 
 ```php
@@ -316,3 +309,18 @@ source .env && sudo docker exec -i $(sudo docker-compose ps -q mysqldb) mysql -u
     }
 ?>
 ```
+___
+
+### Additional info
+
+* Copy all your web files to `./web/public` folder
+* You can change the default ports by modifying file `docker-compose.yml`, for example: 
+```sh
+    ports:
+        - "80:80"   
+        - "443:443"
+```        
+
+___
+
+Created by: [nanoninja](https://github.com/nanoninja) | Forked by: [komputronika](https://github.com/komputronika)
